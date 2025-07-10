@@ -50,7 +50,7 @@ Therefore you'll tpyically see that reosurce creates won't give high-level privi
 CONTENT
   type        = string
   validation {
-    condition = can(regex("^([a-fA-F0-9]{8}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{12})$", var.group_id))
+    condition = can(regex("^([a-fA-F0-9]{8}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{12})$", var.entra_group_id))
     error_message = "The group ID must be a valid UUID (e.g., 3c318d10-76b5-4c4b-8c8d-5b56e3abf44d)."
   }
   validation {
