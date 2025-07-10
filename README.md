@@ -1,2 +1,2 @@
-# azure-application-landing-zone
-Andrew's Azure Terraform module for creating an Azure Application Landing Zone
+<!-- BEGIN_TF_DOCS -->
+<!-- END_TF_DOCS -->
