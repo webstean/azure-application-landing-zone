@@ -1,0 +1,18 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+      "github/webstean/azure-application-landing-zone/renovate-config"
+    ],
+    "packageRules": [
+      {
+        "matchUpdateTypes": [
+          "minor",
+          "patch",
+          "pin",
+          "digest"
+        ],
+        "automerge": true
+      }
+    ],
+    "baseBranches": ["main"]
+}
