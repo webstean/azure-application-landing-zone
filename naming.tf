@@ -5,15 +5,26 @@ resource "random_string" "naming_seed" {
   special = false
 }
 
-## combination of application and project, so we can have multiple projects with the same appplication and
-## different application with in the same project.
-module "naming-application" {
+## https://registry.terraform.io/modules/Azure/naming/azurerm/latest?tab=outputs
+## Hopefully, will be replace by avm-utl-naming https://registry.terraform.io/modules/Azure/avm-utl-naming/azure/latest
+module "naming-global" {
   for_each = { for k, v in local.regions : k => v if k == var.location_key }
 
   source  = "Azure/naming/azurerm"
   version = "~>0.0, < 1.0"
 
-  suffix = [lower(var.org_shortname), lower(var.landing_zone_name), lower(var.project_name), lower(var.application_name), lower(each.value.short_name)]
+  suffix = [lower(var.org_shortname), lower("global"), lower(each.value.short_name)]
+
+  unique-seed = random_string.naming_seed.result
+}
+
+module "naming-landing-zone" {
+  for_each = { for k, v in local.regions : k => v if k == var.location_key }
+
+  source  = "Azure/naming/azurerm"
+  version = "~>0.0, < 1.0"
+
+  suffix = [lower(var.org_shortname), lower("lz"), lower(var.landing_zone_name), lower(each.value.short_name)]
 
   unique-seed = random_string.naming_seed.result
 }
