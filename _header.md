@@ -43,7 +43,7 @@ gh release create v0.0.2 --title "v0.0.2" --notes "New release"
 
 Example:
 ```hcl
-module "webstean-azure-application-landing-zone" {
+module "application-landing-zone" {
   source  = "webstean/azure-application-landing-zone/azurerm"
   version = "~>0.0, < 1.0"
 
