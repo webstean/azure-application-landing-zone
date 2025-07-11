@@ -43,7 +43,7 @@ module "application-landing-zone" {
 
 }
 
-module "webstean-azure-application-landing-zone" {
+module "application-landing-zone" {
   source  = "webstean/azure-application-landing-zone/azurerm"
   version = "~>0.0, < 1.0"
 
