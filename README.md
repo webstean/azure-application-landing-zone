@@ -8,7 +8,7 @@ otherwise known as an environment (dev, test, sit, uat etc..)
 
 [Terraform Registry Home - my other modules](https://registry.terraform.io/namespaces/webstean)
 
-This module create a what Microsoft's calls an [Application Landing Zone](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/app-platform/ready) which you can think of an environment in which you applications and services can run, like DEV, TEST, SIT, UAT, PROD, etc.
+This module creats what Microsoft's calls an [Application Landing Zone](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/app-platform/ready) which you can think of an environment in which you applications and services can run, like DEV, TEST, SIT, UAT, PROD, etc.
 
 > [!IMPORTANT]
 > This is important
@@ -16,6 +16,15 @@ This module create a what Microsoft's calls an [Application Landing Zone](https:
 
 > [!INFO]
 > This is info
+
+> [!NOTE]
+> This is a note
+
+> [!CAUTION]
+> This is caution
+
+> [!DANGER]
+> This module creates lots of resources, that SHOULD cost zero to very little moneny, but things change! BE CAREFUL, so you don't get **Bill Shocks**
 
 Example:
 ```hcl
