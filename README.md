@@ -2,9 +2,11 @@
 # Andrew's Azure Terraform module for creating an Azure Application Landing Zone
 otherwise known as an environment (dev, test, sit, uat etc..)
 
-[GitHub Repository - https://github.com/webstean/azure-application-landing-zone](https://github.com/webstean/azure-application-landing-zone)
-[Terraform Registry for this module](https://registry.terraform.io/modules/webstean/azure-application-landing-zone/azurerm/latest)
-[Terraform Registry Home - other modules](https://registry.terraform.io/namespaces/webstean)
+[GitHub Repository](https://github.com/webstean/azure-application-landing-zone)
+
+[Terraform Registry for this module](https://github.com/webstean/azure-application-landing-zone)
+
+[Terraform Registry Home - my other modules](https://registry.terraform.io/namespaces/webstean)
 
 This module is intended to be an **example** of how you can use Terraform Azure modules in a enterprise like environment.
 
@@ -68,6 +70,7 @@ module "application-landing-zone" {
 
 }
 ```
+---
 
 <!-- markdownlint-disable MD033 -->
 ## Requirements
