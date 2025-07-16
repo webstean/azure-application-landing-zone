@@ -10,8 +10,11 @@ otherwise known as an environment (dev, test, sit, uat etc..)
 
 This module creates what Microsoft's calls an [Application Landing Zone](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/app-platform/ready) which you can think of an environment in which you applications and services can run, like DEV, TEST, SIT, UAT, PROD, etc.
 
-This include main different types of resources including, but not limited to:
+This is apart of what Microsoft calls their [Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/what-is-well-architected-framework).
+
+This module will deploy many different types of resources including, but not limited to:
 - One Public DNS Zone (unless the variable always_create_private_link is set to "yes")
+- One Virtual Network with preconfigure subnets and Bastion, which is used hosting resources in the Landing Zone
 - Lots Private DNS for use with Private LInk (Only when the variable always_create_private_link is set to "yes")
 - Two User Assigned Identities, one in intended for humans and the other for services/applications
 - One Static Web App, for hosting static contect, such as information on the created landing zone
@@ -21,9 +24,15 @@ This include main different types of resources including, but not limited to:
 - One Cosmos DB Account
 - One Azure Communication Service (ACS) for sending emails, SMSes and WhatsApp messages
 - Three Storage Accounts (one for SQL Servers logs, one for files and one for the blobs)
+- An Automation Account for running scripts, such as Azure CLI or PowerShell scripts either manually or via a schedule
 
-You need to tell the module which Azure Resource Group to put everytihng in, as this won't be created by this module, in order to support [Azure Deployment Environments](https://learn.microsoft.com/en-us/azure/deployment-environments/overview-what-is-azure-deployment-environments)
+and finally:
+- One App Configuration preconfigured with all the landing zone deployments (SQL Server endpoints etc...)
 
+You need to tell the module which Azure Resource Group to put everything in, as this won't be created by this module, in order to support [Azure Deployment Environments](https://learn.microsoft.com/en-us/azure/deployment-environments/overview-what-is-azure-deployment-environments)
+
+Option, you can peer the Virtual Network into an existing vWAN Hub, which will allow you to connect to other Landing Zones and the Internet in general securelty via centralised infrastrucutre.
+This infrastructure can be deployed via the 
 
 > [!IMPORTANT]
 > ❗ This is important 
@@ -36,6 +45,8 @@ You need to tell the module which Azure Resource Group to put everytihng in, as 
 > [!CAUTION]
 > ℹ️ This module creates lots of resources, that SHOULD cost zero to very little money, but things change! BE CAREFUL, so you don't get **Bill Shocks**
 >
+
+![Azure Landing Zone](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/media/azure-landing-zone-architecture-diagram-hub-spoke.svg#lightbox)
 
 
 Example:
