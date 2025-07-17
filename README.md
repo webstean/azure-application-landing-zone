@@ -8,6 +8,15 @@ otherwise known as an environment (dev, test, sit, uat etc..)
 
 [Terraform Registry Home - my other modules](https://registry.terraform.io/namespaces/webstean)
 
+[![Python][terraform-shield]][tf-version]
+[![Latest][version-shield]][release-url]
+[![Tests][test-shield]][test-url]
+[![License][license-shield]][license-url]
+<!-- [![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url] -->
+
 This module creates what Microsoft's calls an [Application Landing Zone](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/app-platform/ready) which you can think of an environment in which you applications and services can run, like DEV, TEST, SIT, UAT, PROD, etc.
 
 This is apart of what Microsoft calls their [Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/what-is-well-architected-framework).
@@ -77,6 +86,9 @@ module "application-landing-zone" {
 }
 ```
 ---
+## License
+
+Distributed under the Apache-2.0 License. See [LICENSE](./LICENSE.md) for more information.
 
 <!-- markdownlint-disable MD033 -->
 ## Requirements
