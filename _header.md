@@ -1,4 +1,4 @@
-# Andrew's Terraform module for creating an Azure Application Landing Zone
+# Andrew's module for creating an Azure Application Landing Zone
 otherwise known as an environment (dev, test, sit, uat etc..)
 
 [GitHub Repository](https://github.com/webstean/azure-application-landing-zone)
