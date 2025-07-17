@@ -88,7 +88,7 @@ module "application-landing-zone" {
 ---
 ## License
 
-Distributed under the Apache-2.0 License. See [LICENSE](./LICENSE.md) for more information.
+Distributed under the Mozilla Public License Version 2.0 License. See [LICENSE](./LICENSE.md) for more information.
 
 <!-- markdownlint-disable MD033 -->
 ## Requirements
