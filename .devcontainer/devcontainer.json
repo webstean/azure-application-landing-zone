@@ -98,6 +98,7 @@
         "HashiCorp.terraform",
         "ms-azuretools.vscode-azureterraform",
         "ms-dotnettools.csharp",
+        "ms-dotnettools.vscode-dotnet-runtime",
         "ms-vscode.powershell",
         "ms-vscode.azurecli",
         "ms-azuretools.vscode-azureresourcegroups",
