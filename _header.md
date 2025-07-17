@@ -65,25 +65,26 @@ module "application-landing-zone" {
   version = "~>0.0, < 1.0"
 
   ## identity
-  user_managed_id     = module.application_landing_zone.user_managed_id     ## services/applications
-  entra_group_id      = azuread_group.cloud_operators.id                    ## humans/admin users
+  user_managed_id                   = module.application_landing_zone.user_managed_id     ## (high-privilege) for services/applications
+  entra_group_id                    = data.azuread_group.cloud_operators.id               ## (low-privilege)  for humans/admin users
   
   ## naming
-  resource_group_name = module.application_landing_zone.resource_group_name
-  landing_zone_name   = "play"
-  project_name        = "main"
-  application_name    = "webstean"
+  resource_group_name               = data.azurerm_resource_group.lz.name
+  landing_zone_name                 = "play"
+  project_name                      = "main"
+  application_name                  = "webstean"
   
   ## sizing
-  sku_name            = "free"          ## other options are: basic, standard, premium or isolated
-  size_name           = "small"         ## other options are: medium, large or x-large
-  location_key        = "australiaeast" ## other supported options are: australiasoutheast, australiacentral
+  sku_name                          = "free"          ## other options are: basic, standard, premium or isolated
+  size_name                         = "small"         ## other options are: medium, large or x-large
+  location_key                      = "australiaeast" ## other supported options are: australiasoutheast, australiacentral
   private_endpoints_always_deployed = false ## other option is: true
+
   ## these are just use for the tags to be applied to each resource
-  owner               = "tbd"           ## freeform text, but should be a person or team, email address is ideal
-  cost_centre         = "unknown"       ## from the accountants, its the owner's cost centre
+  owner                             = "tbd"           ## freeform text, but should be a person or team, email address is ideal
+  cost_centre                       = "unknown"       ## from the accountants, its the owner's cost centre
   ##
-  subscription_id     = data.azurerm_client_config.current.subscription_id
+  subscription_id                   = data.azurerm_client_config.current.subscription_id
   special = "special"
 
 }
@@ -91,4 +92,4 @@ module "application-landing-zone" {
 ---
 ## License
 
-Distributed under the Mozilla Public License Version 2.0 License. See [LICENSE](./LICENSE.md) for more information.
+Distributed under the Mozilla Public License Version 2.0 License. See [LICENSE](./LICENSE) for more information.
