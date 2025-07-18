@@ -10,7 +10,6 @@ The default is true.
 DESCRIPTION
 }
 
-
 variable "enable_telemetry" {
   type        = bool
   sensitive   = false
@@ -76,53 +75,6 @@ CONTENT
     error_message = "The varible environment must be only one of : australiaeast, australiasoutheast, australiacentral or australiacentral2"
   }
 } // usage: local.regons[var.location_key].name  etc...
-
-variable "application_name" {
-  description = <<CONTENT
-(Required) application_name (freeform) so we can tell what each resource is being used for
-This should be a readily recongnisable name for you organisation, and is intended to be a large group of resources that comprise that application.
-A common mistake with Azure (and other clouds), is creating too many "applications", like spliting thing into integration, website, database etc...
-This usually just makes it harder to manage, so we recommend that you create a single application for each "application" that you are deploying.
-Unlike what you may have experience on-premises, put the components like a frontend and database in the same namespace (like as application) you can still every securely separate them from both a security and opertational perspecitve.
-The default is "main". Another good options would be "default" but even better would be your internal application name.
-CONTENT
-  sensitive   = false
-  type        = string
-  default     = "main"
-  validation {
-    error_message = <<CONTENT
-The variable "application_name" must be between 3 and 6 characters in length and may only contain numbers and lowercase letters only."
-CONTENT
-    condition = (
-      length(var.application_name) > 2 &&
-      length(var.application_name) < 12 &&
-      can(regex("[a-z.*]|[0-9]", var.application_name))
-    )
-  }
-}
-
-variable "project_name" {
-  description = <<CONTENT
-(Required) project_name (freeform) is used in special cases, where you want to deploy two or more applications, with the same name in the same landing zone.
-This would be usualy, typically you would only deploy the application once per landing zone, once in UAT, once in DEV and once in SIT etc..
-However, sometimes in DEV for example, you need to support multiple developer teams, working on the same code or different parts of the project and they historically clash.
-The default is "default" and we recommend you pick a project_name and stick to the same one. 
-It should only be changed, when in the special case of deploying the same app in the same landing zone more than once.
-CONTENT
-  sensitive   = false
-  type        = string
-  default     = "default"
-  validation {
-    error_message = <<CONTENT
-The variable project_name must be between 3 and 6 characters in length and may only contain numbers and lowercase letters only."
-CONTENT
-    condition = (
-      length(var.project_name) > 2 &&
-      length(var.project_name) < 12 &&
-      can(regex("[a-z.*]|[0-9]", var.project_name))
-    )
-  }
-}
 
 variable "landing_zone_name" {
   description = <<CONTENT
