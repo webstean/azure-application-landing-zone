@@ -21,23 +21,6 @@ CONTENT
   value       = var.location_key
 }
 
-output "application_name" {
-  description = <<CONTENT
-(Required) application name (freeform) so we can tell what each resource is being used for
-This also coressponds to the Application Landing Zone that the resource/resources will be deployed into.
-This is ignored, when creatting an Application Landing Zone, as the name is derived from the environment_name.
-CONTENT
-  value       = var.application_name
-}
-
-output "project_name" {
-  description = <<CONTENT
-(Required) project name used to distinguish that exist to enable the rare case where you want the same application deployed
-multiple times (as a different) projects within the same application landing zone.
-CONTENT
-  value       = var.project_name
-}
-
 output "landing_zone_name" {
   description = <<CONTENT
 (Required) environment_name must be one of ("core", "platform", "play", "dev", "test", "uat", "sit", "preprod", "prod", "live") so we can tell what each resource is being used for
