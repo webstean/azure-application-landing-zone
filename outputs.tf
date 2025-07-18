@@ -23,8 +23,8 @@ CONTENT
 
 output "landing_zone_name" {
   description = <<CONTENT
-(Required) environment_name must be one of ("core", "platform", "play", "dev", "test", "uat", "sit", "preprod", "prod", "live") so we can tell what each resource is being used for
-This also coressponds to the Application Landing Zone that the resource/resources will be deployed into.
+(Required) landing_zone_name must be one of ("core", "platform", "play", "dev", "test", "uat", "sit", "preprod", "prod", "live") so we can tell what each resource is being used for
+This also coresponds to the Application Landing Zone that the resource/resources will be deployed into.
 CONTENT
   value       = var.landing_zone_name
 }
@@ -86,3 +86,4 @@ output "data_phi" {
 CONTENT
   value       = var.data_phi
 }
+
