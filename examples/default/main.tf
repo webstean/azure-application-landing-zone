@@ -101,7 +101,7 @@ module "application-landing-zone" {
   owner               = module.application-landing-zone.owner
   cost_centre         = module.application-landing-zone.cost_centre
   monitoring          = module.application-landing-zone.monitoring
-  special = "special"
+  keyvault_name = module.azure-application-landing-zone-keyvault.key_vault_name
 
 }
 ---
