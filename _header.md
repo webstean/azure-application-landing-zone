@@ -85,7 +85,7 @@ module "application-landing-zone" {
   cost_centre                       = "unknown"       ## from the accountants, its the owner's cost centre
   ##
   subscription_id                   = data.azurerm_client_config.current.subscription_id
-  special = "special"
+  keyvault_name = module.azure-application-landing-zone-keyvault.key_vault_name
 
 }
 ```
