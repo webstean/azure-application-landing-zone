@@ -40,20 +40,20 @@ CONTENT
   }
 }
 
-variable "entra_group_id" {
+variable "user_managed_name" {
   description = <<CONTENT
-The existing Entra ID Workforce group id (a UUID) that will be given full-ish permissions to the resource.
-This is intended for humans, not applications, so that they can access and perform some manage the resources.
-One of the intention of this module, is to only allow very limit admin access, so they everything can be managed by the module. (ie by code)
-Therefore you'll tpyically see that reosurce creates won't give high-level priviledge like Owner, Contributor to users.
+The Entra ID / Azure Managed Identity that will give access to this resource.
+Note, that Managed Identities can be created in either Entra ID (azuread_application) or Azure ()
+Unless you need a secret for things, like external authentication, then you should use the Azure variety.
+This module only support user-assigned managed identities, not system-assigned managed identities.
 CONTENT
   type        = string
+#  validation {
+#    condition     = can(regex("^/subscriptions/[a-f0-9-]+/resourceGroups/[^/]+/providers/Microsoft\\.ManagedIdentity/userAssignedIdentities/[^/]+$", var.user_managed_name))
+#    error_message = "The managed identity ID must be a valid ARM ID of a user-assigned identity."
+#  }
   validation {
-    condition     = can(regex("^([a-fA-F0-9]{8}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{12})$", var.entra_group_id))
-    error_message = "The group ID must be a valid UUID (e.g., 3c318d10-76b5-4c4b-8c8d-5b56e3abf44d)."
-  }
-  validation {
-    condition     = length(var.entra_group_id) > 0
+    condition     = length(var.user_managed_name) > 0
     error_message = "The variable location cannot be blank."
   }
 }
