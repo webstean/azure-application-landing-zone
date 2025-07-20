@@ -211,9 +211,9 @@ variable "bypass_ip_cidr" {
   (Required) bypass_ip_cidr (CIDR notation) is a list of IP addresses or CIDR ranges that should be allowed to bypass the firewall for Azure PaaS service like storage accounts, sql servers etc..
   This is typically used for management purposes, such as allowing access from a specific IP address or range of IP addresses, such as a management workstation or a specific network.
 CONTENT
-  sensitive = false 
-  type       = list(string)
-  default    = []
+  sensitive   = false
+  type        = list(string)
+  default     = []
 }
 
 variable "owner" {
