@@ -1,1 +1,0 @@
-./lz/azure-application-landing-zone/modules/lz-storage.tf
