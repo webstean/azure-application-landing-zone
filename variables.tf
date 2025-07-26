@@ -40,7 +40,24 @@ CONTENT
   }
 }
 
-variable "entra_group_id" {
+variable "entra_group_unified_id" {
+  description = <<CONTENT
+The Entra ID Workforce group id (a UUID) that will be given full-ish permissions to the resource.
+This is intended for humans, not applications, so that they can access and perform some manage the resources.
+One of the intention of this module, is to only allow very limit admin access, so they everything can be managed by the module. (ie by code)
+Therefore you'll tpyically see that reosurce creates won't give high-level priviledge like Owner, Contributor to users.
+CONTENT
+  type        = string
+  validation {
+    condition     = can(regex("^/groups/([a-fA-F0-9]{8}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{12})$", var.entra_group_id))
+    error_message = "The group ID must start with '/groups/' followed by a valid UUID (e.g., /groups/3c318d10-76b5-4c4b-8c8d-5b56e3abf44d)."
+  }
+  validation {
+    condition     = length(var.entra_group_id) > 0
+    error_message = "The variable location cannot be blank."
+  }
+}
+variable "entra_group_pag_id" {
   description = <<CONTENT
 The existing Entra ID Workforce group id (a UUID) that will be given full-ish permissions to the resource.
 This is intended for humans, not applications, so that they can access and perform some manage the resources.
