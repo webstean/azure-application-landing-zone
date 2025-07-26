@@ -1,0 +1,1 @@
+./lz/azure-application-landing-zone/lz-tags.tf
