@@ -1,0 +1,1 @@
+./lz/azure-application-landing-zone/modules/lz-net-bastion.tf
