@@ -1,5 +1,5 @@
 ## landing-zone module
-## check the input variables are axctually valid
+## check the input variables are actually valid
 
 ## mandatory
 data "azurerm_resource_group" "this" {
@@ -7,11 +7,11 @@ data "azurerm_resource_group" "this" {
 }
 
 data "azuread_group" "this" {
-  object_id = startswith(var.entra_group_id, "/groups/") ? substr(var.entra_group_id, 8, -1) : var.entra_group_id
+  object_id = startswith(var.entra_group_id, "/groups/") ? substr(var.entra_group_id, 8, -1) : var.entra_group_pag_id
 }
 
 data "azurerm_user_assigned_identity" "this" {
-  name                = var.user_managed_name
+  name                = var.user_assigned_identity_name
   resource_group_name = var.resource_group_name
 }
 
