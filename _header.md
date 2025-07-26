@@ -66,7 +66,7 @@ module "application-landing-zone" {
 
   ## identity
   user_managed_id                   = module.application_landing_zone.user_managed_id     ## (high-privilege) for services/applications
-  entra_group_id                    = data.azuread_group.cloud_operators.id               ## (low-privilege)  for humans/admin users
+  entra_group_unified_id            = data.azuread_group.cloud_operators.id               ## (low-privilege)  for humans/admin users
   
   ## naming
   resource_group_name               = data.azurerm_resource_group.lz.name
