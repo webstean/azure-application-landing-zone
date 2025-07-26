@@ -1,7 +1,7 @@
 ## landing-zone module
 ## check the input variables are actually valid
 
-## must already exist, it cannot be created here
+## this has to already exist, you cannot create it here
 data "azurerm_resource_group" "this" {
   name = var.resource_group_name
 }
