@@ -52,9 +52,9 @@ module "lz-setup" {
   dns_zone_name        = module.lz-init.dns_zone_name
 
   ## Identity
-  entra_group_pag_id                      = module.lz-init.entra_group_pag_id
-  user_assigned_identity_graph_id         = module.lz-init.user_assigned_identity_graph_id
-  user_assigned_identity_landing_zone_id  = module.lz-init.user_assigned_identity_landing_zone_id
+  entra_group_pag_id                       = module.lz-init.entra_group_pag_id
+  user_assigned_identity_graph_name        = module.lz-init.user_assigned_identity_graph_id
+  user_assigned_identity_landing_zone_name = module.lz-init.user_assigned_identity_landing_zone_id
 
   ## SKUs and Sizes
   sku_name             = module.lz-init.landing_zone_name.sku_name
