@@ -36,9 +36,10 @@ module "lz-init" {
   resource_group_name  = var.resource_group_name
 
   ## Tags / Naming
-  owner                = var.owner
-  cost_centre          = var.cost_centre
-  monitoring           = var.monitoring
+  owner_service        = "unknown@myorg.com"          ## business owner  - email address, used for visbility & alerts
+  owner_tech           = "unknown@myorg.com"          ## business owner  - email address, used for visbility & alerts
+  cost_centre          = "unknown"                    ## from the accountants, its the owner's cost centre. Freeform text
+  monitoring           = "not-monitored"              ## other options are: 24-7 or 8-5
   org_fullname         = var.org_fullname
   org_shortname        = var.org_shortname
 }
@@ -69,7 +70,8 @@ module "lz-setup" {
   resource_group_name  = module.lz-init.resource_group_name
 
   ## Tags / Naming
-  owner                = module.lz-init.owner
+  owner_tech           = module.lz-init.owner_tech
+  owner_service        = module.lz-init.owner_service
   cost_centre          = module.lz-init.cost_centre
   monitoring           = module.lz-init.monitoring
   org_fullname         = module.lz-init.org_fullname
