@@ -1,3 +1,26 @@
+variable "resource_group_name" {
+  description = <<CONTENT
+(Required) The name of the resource group to deploy the resources into. This resource group needs to be already exist!
+CONTENT
+  type        = string
+  validation {
+    condition     = length(var.resource_group_name) > 0
+    error_message = "The variable resource_group_name cannot be blank."
+  }
+  validation {
+    condition     = length(var.resource_group_name) <= 90
+    error_message = "The resource group name cannot exceed 90 characters."
+  }
+  validation {
+    condition     = can(regex("^[a-zA-Z0-9-_.()]+$", var.resource_group_name))
+    error_message = "The resource group name can only contain alphanumeric characters, hyphens, underscores, periods, and parentheses."
+  }
+  validation {
+    condition     = !endswith(var.resource_group_name, ".")
+    error_message = "The resource group name cannot end with a period."
+  }
+}
+
 variable "dns_zone_name" {
   type      = string
   sensitive = false
@@ -8,6 +31,18 @@ For more information see https://aka.ms/avm/telemetryinfo.
 If it is set to false, then no telemetry will be collected.
 The default is true.
 DESCRIPTION
+  validation {
+    condition     = length(var.dns_zone_name) > 0 && length(var.dns_zone_name) <= 253
+    error_message = "The DNS zone name cannot be empty and must be 253 characters or less."
+  }
+  validation {
+    condition     = can(regex("^[a-zA-Z0-9][a-zA-Z0-9-]*(\\.[a-zA-Z0-9][a-zA-Z0-9-]*)*$", var.dns_zone_name))
+    error_message = "The DNS zone name must be a valid domain name. It can only contain letters, numbers, and hyphens (except at beginning or end of a label), with labels separated by periods."
+  }
+  validation {
+    condition     = !can(regex("\\.\\.", var.dns_zone_name))
+    error_message = "The DNS zone name cannot contain consecutive periods."
+  }
 }
 
 variable "enable_telemetry" {
@@ -20,59 +55,6 @@ For more information see https://aka.ms/avm/telemetryinfo.
 If it is set to false, then no telemetry will be collected.
 The default is true.
 DESCRIPTION
-}
-
-variable "user_assigned_identity_name" {
-  description = <<CONTENT
-The Entra ID / Azure Managed Identity that will give access to this resource.
-Note, that Managed Identities can be created in either Entra ID (azuread_application) or Azure ()
-Unless you need a secret for things, like external authentication, then you should use the Azure variety.
-This module only support user-assigned managed identities, not system-assigned managed identities.
-CONTENT
-  type        = string
-  #  validation {
-  #    condition     = can(regex("^/subscriptions/[a-f0-9-]+/resourceGroups/[^/]+/providers/Microsoft\\.ManagedIdentity/userAssignedIdentities/[^/]+$", var.user_managed_name))
-  #    error_message = "The managed identity ID must be a valid ARM ID of a user-assigned identity."
-  #  }
-  validation {
-    condition     = length(var.user_assigned_identity_name) > 0
-    error_message = "The variable location cannot be blank."
-  }
-}
-
-variable "entra_group_unified_id" {
-  description = <<CONTENT
-The Entra ID Workforce group id (a UUID) that will be given full-ish permissions to the resource.
-This is intended for humans, not applications, so that they can access and perform some manage the resources.
-One of the intention of this module, is to only allow very limit admin access, so they everything can be managed by the module. (ie by code)
-Therefore you'll tpyically see that reosurce creates won't give high-level priviledge like Owner, Contributor to users.
-CONTENT
-  type        = string
-  validation {
-    condition     = can(regex("^/groups/([a-fA-F0-9]{8}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{12})$", var.entra_group_unified_id))
-    error_message = "The group ID must start with '/groups/' followed by a valid UUID (e.g., /groups/3c318d10-76b5-4c4b-8c8d-5b56e3abf44d)."
-  }
-  validation {
-    condition     = length(var.entra_group_unified_id) > 0
-    error_message = "The variable location cannot be blank."
-  }
-}
-variable "entra_group_pag_id" {
-  description = <<CONTENT
-The existing Entra ID Workforce group id (a UUID) that will be given full-ish permissions to the resource.
-This is intended for humans, not applications, so that they can access and perform some manage the resources.
-One of the intention of this module, is to only allow very limit admin access, so they everything can be managed by the module. (ie by code)
-Therefore you'll tpyically see that reosurce creates won't give high-level priviledge like Owner, Contributor to users.
-CONTENT
-  type        = string
-  validation {
-    condition     = can(regex("^/groups/([a-fA-F0-9]{8}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{4}\\-[a-fA-F0-9]{12})$", var.entra_group_pag_id))
-    error_message = "The group ID must start with '/groups/' followed by a valid UUID (e.g., /groups/3c318d10-76b5-4c4b-8c8d-5b56e3abf44d)."
-  }
-  validation {
-    condition     = length(var.entra_group_pag_id) > 0
-    error_message = "The variable location cannot be blank."
-  }
 }
 
 variable "location_key" {
@@ -343,19 +325,6 @@ CONTENT
   validation {
     error_message = "The variable cost_centre cannot be blank/empty string."
     condition     = length(var.cost_centre) > 0
-  }
-}
-
-variable "resource_group_name" {
-  description = <<CONTENT
-(Required) The name of the resource group to deploy the resources into.
-This resource group needs to be already exist!
-This is the resource group that the resources will be deployed into and whoever is running the module 
-CONTENT
-  type        = string
-  validation {
-    condition     = length(var.resource_group_name) > 0
-    error_message = "The variable resource_group_id cannot be blank."
   }
 }
 
