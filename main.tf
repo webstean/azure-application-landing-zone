@@ -6,15 +6,6 @@ data "azurerm_resource_group" "this" {
   name = var.resource_group_name
 }
 
-data "azuread_group" "this" {
-  object_id = startswith(var.entra_group_pag_id, "/groups/") ? substr(var.entra_group_pag_id, 8, -1) : var.entra_group_pag_id
-}
-
-data "azurerm_user_assigned_identity" "this" {
-  name                = var.user_assigned_identity_name
-  resource_group_name = var.resource_group_name
-}
-
 module "lz-init" {
   ## Creates the initial landing zone resources, such the Azure Key Vault, Identities, Backup & public and private DNS zone (only if var.private_endpoints_always_deployed == true)
   source  = "./init/"
