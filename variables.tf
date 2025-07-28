@@ -49,6 +49,7 @@ variable "enable_telemetry" {
   type        = bool
   sensitive   = false
   default     = false
+  nullable    = false
   description = <<DESCRIPTION
 This variable controls whether or not Microsoft telemetry is enabled for the AVM modules, that modeule will call.
 For more information see https://aka.ms/avm/telemetryinfo.
@@ -224,21 +225,21 @@ This will appear in the owner tag of the resource, so that it can be easily foun
 CONTENT
   sensitive   = false
   type        = string
-  default     = "unknown"
+  default     = "unknown@unknown.org"
   validation {
-    error_message = "The variable owner cannot be blank/empty string."
-    condition     = length(var.owner) > 0
+    error_message = "The variable owner_tech cannot be blank/empty string."
+    condition     = length(var.owner_tech) > 0
   }
   validation {
-    error_message = "The variable owner must be more than 6 characters"
-    condition     = length(var.owner) > 6
+    error_message = "The variable owner_tech must be more than 6 characters"
+    condition     = length(var.owner_tech) > 6
   }
   validation {
     error_message = "The variable owner must be between 6 and 25 characters and can only contain lowercase letters, numbers, hyphens and @"
     condition = (
-      length(var.owner) > 6 &&
-      length(var.owner) < 25 &&
-      can(regex("@|[a-z.*]|[0-9]", var.owner))
+      length(var.owner_tech) > 6 &&
+      length(var.owner_tech) < 25 &&
+      can(regex("@|[a-z.*]|[0-9]", var.owner_tech))
     )
   }
 }
@@ -251,21 +252,21 @@ This will appear in the owner tag of the resource, so that it can be easily foun
 CONTENT
   sensitive   = false
   type        = string
-  default     = "unknown"
+  default     = "unknown@unknown.org"
   validation {
-    error_message = "The variable owner cannot be blank/empty string."
-    condition     = length(var.owner) > 0
+    error_message = "The variable owner_service cannot be blank/empty string."
+    condition     = length(var.owner_service) > 0
   }
   validation {
-    error_message = "The variable owner must be more than 6 characters"
-    condition     = length(var.owner) > 6
+    error_message = "The variable owner_service must be more than 6 characters"
+    condition     = length(var.owner_service) > 6
   }
   validation {
-    error_message = "The variable owner must be between 6 and 25 characters and can only contain lowercase letters, numbers, hyphens and @"
+    error_message = "The variable owner_service must be between 6 and 25 characters and can only contain lowercase letters, numbers, hyphens and @"
     condition = (
-      length(var.owner) > 6 &&
-      length(var.owner) < 25 &&
-      can(regex("@|[a-z.*]|[0-9]", var.owner))
+      length(var.owner_service) > 6 &&
+      length(var.owner_service) < 25 &&
+      can(regex("@|[a-z.*]|[0-9]", var.owner_service))
     )
   }
 }
