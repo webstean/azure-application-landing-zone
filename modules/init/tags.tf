@@ -3,16 +3,16 @@ locals {
   ## Azure tags
   ## A maximum of 15 tags are allowed with keys no longer than 512 and values no longer than 256 characters.
   tags_default = {
-    type        = contains(["production", "live"], var.landing_zone_name) ? "permanent" : "temporary"
-    environment = var.landing_zone_name
-    costcentre  = var.cost_centre
-    data_PII    = var.data_pii
-    data_PHI    = var.data_phi
-    createdby   = "terraform"
-    monitoring  = var.monitoring
-    created     = formatdate("DD/MM/YYYY", timestamp())
+    type          = contains(["production", "live"], var.landing_zone_name) ? "permanent" : "temporary"
+    environment   = var.landing_zone_name
+    costcentre    = var.cost_centre
+    data_PII      = var.data_pii
+    data_PHI      = var.data_phi
+    createdby     = "terraform"
+    monitoring    = var.monitoring
+    created       = formatdate("DD/MM/YYYY", timestamp())
     owner_service = var.owner_service
-    owner_tech  = var.owner_tech
+    owner_tech    = var.owner_tech
   }
 }
 
