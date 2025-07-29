@@ -8,40 +8,40 @@ data "azurerm_resource_group" "this" {
 
 module "lz-init" {
   ## Creates the initial landing zone resources, such the Azure Key Vault, Identities, Backup & public and private DNS zone (only if var.private_endpoints_always_deployed == true)
-  source  = "./init/"
+  source = "./init/"
 
   ## Naming 
-  landing_zone_name    = var.landing_zone_name
-  dns_zone_name        = var.dns_zone_name
+  landing_zone_name = var.landing_zone_name
+  dns_zone_name     = var.dns_zone_name
 
   ## SKUs and Sizes
-  sku_name             = var.sku_name
-  size_name            = var.size_name
+  sku_name  = var.sku_name
+  size_name = var.size_name
 
   ## Security
   private_endpoints_always_deployed = var.private_endpoints_always_deployed
 
   ## Location
-  subscription_id      = var.subscription_id
-  location_key         = var.location_key
-  resource_group_name  = var.resource_group_name
+  subscription_id     = var.subscription_id
+  location_key        = var.location_key
+  resource_group_name = var.resource_group_name
 
   ## Tags / Naming
-  owner_service        = "unknown@myorg.com"          ## business owner  - email address, used for visbility & alerts
-  owner_tech           = "unknown@myorg.com"          ## business owner  - email address, used for visbility & alerts
-  cost_centre          = "unknown"                    ## from the accountants, its the owner's cost centre. Freeform text
-  monitoring           = "not-monitored"              ## other options are: 24-7 or 8-5
-  org_fullname         = var.org_fullname
-  org_shortname        = var.org_shortname
+  owner_service = "unknown@myorg.com" ## business owner  - email address, used for visbility & alerts
+  owner_tech    = "unknown@myorg.com" ## business owner  - email address, used for visbility & alerts
+  cost_centre   = "unknown"           ## from the accountants, its the owner's cost centre. Freeform text
+  monitoring    = "not-monitored"     ## other options are: 24-7 or 8-5
+  org_fullname  = var.org_fullname
+  org_shortname = var.org_shortname
 }
 
 module "lz-setup" {
   ## Creates the storage accounts
-  source  = "./setup/"
+  source = "./setup/"
 
   ## Naming 
-  landing_zone_name    = module.lz-init.landing_zone_name
-  dns_zone_name        = module.lz-init.dns_zone_name
+  landing_zone_name = module.lz-init.landing_zone_name
+  dns_zone_name     = module.lz-init.dns_zone_name
 
   ## Identity
   entra_group_pag_id                       = module.lz-init.entra_group_pag_id
@@ -49,23 +49,23 @@ module "lz-setup" {
   user_assigned_identity_landing_zone_name = module.lz-init.user_assigned_identity_landing_zone_id
 
   ## SKUs and Sizes
-  sku_name             = module.lz-init.landing_zone_name.sku_name
-  size_name            = module.lz-init.landing_zone_name.size_name
+  sku_name  = module.lz-init.landing_zone_name.sku_name
+  size_name = module.lz-init.landing_zone_name.size_name
 
   ## Security
   private_endpoints_always_deployed = var.private_endpoints_always_deployed
 
   ## Location
-  subscription_id      = module.lz-init.subscription_id
-  location_key         = module.lz-init.location_key
-  resource_group_name  = module.lz-init.resource_group_name
+  subscription_id     = module.lz-init.subscription_id
+  location_key        = module.lz-init.location_key
+  resource_group_name = module.lz-init.resource_group_name
 
   ## Tags / Naming
-  owner_tech           = module.lz-init.owner_tech
-  owner_service        = module.lz-init.owner_service
-  cost_centre          = module.lz-init.cost_centre
-  monitoring           = module.lz-init.monitoring
-  org_fullname         = module.lz-init.org_fullname
-  org_shortname        = module.lz-init.org_shortname
+  owner_tech    = module.lz-init.owner_tech
+  owner_service = module.lz-init.owner_service
+  cost_centre   = module.lz-init.cost_centre
+  monitoring    = module.lz-init.monitoring
+  org_fullname  = module.lz-init.org_fullname
+  org_shortname = module.lz-init.org_shortname
 }
 
